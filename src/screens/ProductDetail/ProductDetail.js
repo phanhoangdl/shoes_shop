@@ -28,18 +28,9 @@ export default class ProductDetail extends Component {
         this.setState({product:product});
     }
 
-    renderSize = () => {
-        this.state.product.size.map((element, index) => {
-            console.log(element)
-            return (
-                <View>
-                    <Text style={{ marginLeft: 10 }}>{{ element }}</Text>
-                </View>
-
-            )
-        });
+    handleBuyClick = () => {
+        this.props.handleCart
     }
-
     // hiển thị phần chi tiết sản phẩm
     renderDetail = () => {
         let product = this.state.product;
@@ -58,7 +49,7 @@ export default class ProductDetail extends Component {
                     <Text style={{ color: '#FF0000', fontSize: 20 }}>Giá: {numberWithCommas(product.gia)}</Text>
                     <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}><Size sizes={product.size} /></View>
                     <View style={{ alignSelf: 'flex-end', marginRight: 10, marginTop: 10, marginBottom: 20 }}>
-                        <TouchableOpacity style={{ backgroundColor: '#FFCC00', width: 120, height: 40, borderRadius: 10 }}>
+                        <TouchableOpacity onPress={() => this.props.handleCart(product)} style={{ backgroundColor: '#FFCC00', width: 120, height: 40, borderRadius: 10 }}>
                             <Text style={{ textAlign: 'center', color: '#FFFFFF', fontSize: 16, fontWeight: 'bold', marginTop: 8 }}>Đặt mua <FontAwesomeIcon name='cart-arrow-down' size={16} /></Text>
                         </TouchableOpacity>
                     </View>
@@ -76,7 +67,7 @@ export default class ProductDetail extends Component {
         }
         else{
             return(
-                <Related product={this.state.product}/>
+                <Related product={this.state.product} />
             )
         }
     }

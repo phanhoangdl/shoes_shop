@@ -49,7 +49,7 @@ export default class Login extends Component {
 
         if (email.trim() == loginInfo.email && password.trim() == loginInfo.password) {
             console.log('Login success');
-            Alert.alert('Login successful')
+            Alert.alert('Thông báo', email + ' đăng nhập thành công')
             navigation.navigate('Home', { params: {email: email, password: password} });
         }
         else {

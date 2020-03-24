@@ -14,7 +14,7 @@ export default class Content extends Component {
     state = {
         product:this.props.product,
         navigation:this.props.navigation,
-        count:1
+        count:0
     }
     handleProductPress = () => {
         let navigation = this.state.navigation;
@@ -46,7 +46,7 @@ export default class Content extends Component {
                         </TouchableOpacity>
                     </View>
                     <View style={{ paddingLeft: 10 }}>
-                        <Text style={{ textAlignVertical: 'top' }}>{item.tenSP}</Text>
+                        <Text style={{ textAlignVertical: 'center',color:'#CC33CC' }}>{item.tenSP}</Text>
                     </View>
                     <View style={{ flex: 1, paddingLeft: 10, alignSelf: 'center' }}>
                         <Text style={{ color: '#FF0000' }}>Giá: {numberWithCommas(item.gia)}</Text>

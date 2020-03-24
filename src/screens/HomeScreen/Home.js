@@ -40,9 +40,11 @@ export default class Home extends Component {
         return (
             <Tab.Navigator
                 tabBarOptions={{
-                    activeTintColor:'#FFD700',
+                    activeTintColor:'#FF9900',
+                    inactiveTintColor:'#D3D3D3',
                     labelStyle: {
-                        fontSize: 13,
+                        fontSize: 12,
+                        
                       },
                 }}
                 
@@ -69,7 +71,7 @@ export default class Home extends Component {
                     name='Shoes'
                     component={Shoes}
                     options={{
-                        tabBarIcon: (focused, color, size) => {
+                        tabBarIcon: ({focused, color, size}) => {
                             return <MaterialComunityIcon name='shoe-formal' color={color} size={size} />
                         }
                     }}
@@ -78,8 +80,8 @@ export default class Home extends Component {
                     name='History'
                     component={History}
                     options={{
-                        tabBarIcon: (focused, color, size) => {
-                            <FontAwesome name='history' color='red' size={size} />
+                        tabBarIcon: ({focused, color, size}) => {
+                            return <FontAwesome name='history' color={color} size={size} />
                         }
                     }} />
             </Tab.Navigator>

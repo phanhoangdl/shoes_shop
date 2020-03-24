@@ -15,8 +15,14 @@ const Stack = createStackNavigator();
 
 export default class App extends Component {
   state = {
-    
+    cart:[]
   }
+
+  handleAddToCart = (product) => {
+    this.setState({cart:[...this.state.cart,product]})
+    console.log(this.state.cart)
+  }
+
   render() {
     return (
       <NavigationContainer>
@@ -33,7 +39,7 @@ export default class App extends Component {
           />
           <Stack.Screen
             name='ProductDetail'
-            component={ProductDetail}
+            //component={ProductDetail}
             options={{
               title: 'Detail',
               headerBackTitle: 'home',
@@ -42,18 +48,21 @@ export default class App extends Component {
               },
               headerTitleAlign: 'center'
             }}
-          />
+          >
+            {props => <ProductDetail {...props} handleCart={(product) => this.handleAddToCart(product)} />}
+          </Stack.Screen>
           <Stack.Screen
             name='Cart'
-            component={Cart}
+            //component={Cart}
             options={{
-              title:'Cart',
+              title:'Shopping Cart',
               headerTitleStyle:{
                 fontWeight:'bold'
               },
               headerTitleAlign:'center'
             }}
-          />
+          >{props => <Cart {...props} products={this.state.cart} />}
+          </Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>
     )
