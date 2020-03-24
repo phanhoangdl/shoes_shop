@@ -6,6 +6,11 @@ Shoes shop with some basic function
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
+Before running app, run command
+```
+npm install
+```
+
 ### Prerequisites
 
 What things you need to install the software and how to install them
