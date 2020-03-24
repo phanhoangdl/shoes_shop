@@ -14,6 +14,9 @@ import Cart from './src/screens/Cart/Cart';
 const Stack = createStackNavigator();
 
 export default class App extends Component {
+  state = {
+    
+  }
   render() {
     return (
       <NavigationContainer>
