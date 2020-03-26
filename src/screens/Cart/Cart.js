@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, Image, ScrollView, TouchableOpacity } from 'react-native'
+import { Text, View, Image, ScrollView, TouchableOpacity, Alert } from 'react-native'
 import { Grid,Row,Col } from 'react-native-easy-grid';
 import Related from '../../components/Related';
 
@@ -40,7 +40,7 @@ export default class Cart extends Component {
         else {
             return (
                 <View style={{justifyContent:'center'}}>
-                    <Text style={{ color: '#FF33FF', fontWeight: 'bold', textAlign:'center'}}>Bạn chưa chọn sản phẩm nào!</Text>
+                    <Text style={{ color: '#FF33FF', fontWeight: 'bold', textAlign:'center'}}>Không có sản phẩm nào!</Text>
                 </View>
                 
             )
@@ -49,7 +49,6 @@ export default class Cart extends Component {
 
     renderCartSummary = () => {
         let products = this.state.products
-        
         if(products != null && products.length > 0){
             return (
                 <View style={{backgroundColor:'rgba(124,205,124,0.7)',width:widthScreen,paddingLeft:10}}>
@@ -65,12 +64,20 @@ export default class Cart extends Component {
             return null
         }
     }
+
+    hanldePay = () => {
+        Alert.alert('Thanh toán thành công, đơn hàng đã được lưu vào History')
+        this.props.clearCart();
+        let products = this.state.products
+        this.props.addHistory(products)
+        this.setState({products:null})
+    }
     renderButton = () => {
         let products = this.state.products
         if(products != null && products.length > 0){
             return (
                 <View>
-                    <TouchableOpacity style={{backgroundColor:'#FF3333',width:widthScreen*.95,height:50,borderRadius:5,justifyContent:'center'}}>
+                    <TouchableOpacity onPress={() => this.hanldePay()} style={{backgroundColor:'#FF3333',width:widthScreen*.95,height:50,borderRadius:5,justifyContent:'center'}}>
                         <Text style={{fontSize:16,textAlign:'center',color:'#FFFFFF'}}>Tiến Hành Thanh Toán</Text>
                     </TouchableOpacity>
                 </View>

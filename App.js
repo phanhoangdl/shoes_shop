@@ -15,28 +15,43 @@ const Stack = createStackNavigator();
 
 export default class App extends Component {
   state = {
-    cart:[]
+    cart: [],
+    histories: []
   }
 
   handleAddToCart = (product) => {
     this.setState({cart:[...this.state.cart,product]})
-    console.log(this.state.cart)
+  }
+
+  handleClearCart = () => {
+    this.setState({cart:null});
+  }
+
+  handleAddToHistory = (products) => {
+    this.setState({histories:[...this.state.histories,products]})
+    console.log(this.state.histories)
   }
 
   render() {
     return (
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name='Login' component={Login} options={{headerTitleAlign: 'center'}}/>
+          <Stack.Screen 
+            name='Login' 
+            component={Login} 
+            options={{headerTitleAlign: 'center'}}
+            />
           <Stack.Screen
             name='Home'
-            component={Home}
+            //component={Home}
             options={{
               title: 'Shoes',
               headerMode:'screen',
               headerShown:false 
             }}
-          />
+          >
+            {props => <Home {...props} histories={this.state.histories} />}
+          </Stack.Screen>
           <Stack.Screen
             name='ProductDetail'
             //component={ProductDetail}
@@ -61,7 +76,7 @@ export default class App extends Component {
               },
               headerTitleAlign:'center'
             }}
-          >{props => <Cart {...props} products={this.state.cart} />}
+          >{props => <Cart {...props} products={this.state.cart} clearCart={() => this.handleClearCart()} addHistory={(products) => this.handleAddToHistory(products)}/>}
           </Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>
