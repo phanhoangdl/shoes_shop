@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import { Text, View, Alert } from 'react-native'
 import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native'
 import {createStackNavigator} from '@react-navigation/stack'
@@ -9,6 +9,7 @@ import Login from './src/screens/Login/Login';
 import Home from './src/screens/HomeScreen/Home';
 import ProductDetail from './src/screens/ProductDetail/ProductDetail'
 import Cart from './src/screens/Cart/Cart';
+import Content from './src/components/Content';
 
 //define navigation
 const Stack = createStackNavigator();
@@ -19,19 +20,37 @@ export default class App extends Component {
     histories: []
   }
 
+  handleCart = () => {
+    console.log('add to cart')
+  }
   handleAddToCart = (product) => {
-    this.setState({cart:[...this.state.cart,product]})
+    console.log(product)
+    if(this.state.cart.find(x => x.maSP == product.maSP)){
+      Alert.alert("Thông báo", `Sản phẩm "${product.tenSP}" đã có trong giỏ hàng`)
+    }else{
+      this.setState({cart:[...this.state.cart,product]})
+      Alert.alert("Thông báo", `Sản phẩm "${product.tenSP}" đã được thêm vào giỏ hàng`)
+    }
   }
 
   handleClearCart = () => {
-    this.setState({cart:null});
+    this.setState({cart:[]});
   }
 
   handleAddToHistory = (products) => {
-    this.setState({histories:[...this.state.histories,products]})
-    console.log(this.state.histories)
+    // products.map((product,index) => {
+    //   this.setState({histories:[...this.state.histories,product]})
+    // })
+    products.forEach(element => {
+      this.state.histories.push(element)
+      //this.addToHistory(element)
+    })
   }
 
+  addToHistory = (product) => {
+    let joined = this.state.histories.concat(product)
+      this.setState({histories:joined})
+  }
   render() {
     return (
       <NavigationContainer>
@@ -45,7 +64,7 @@ export default class App extends Component {
             name='Home'
             //component={Home}
             options={{
-              title: 'Shoes',
+              title: 'Cửa Hàng',
               headerMode:'screen',
               headerShown:false 
             }}
@@ -56,7 +75,7 @@ export default class App extends Component {
             name='ProductDetail'
             //component={ProductDetail}
             options={{
-              title: 'Detail',
+              title: 'Sản Phẩm',
               headerBackTitle: 'home',
               headerTitleStyle: {
                 fontWeight: 'bold'
@@ -70,7 +89,7 @@ export default class App extends Component {
             name='Cart'
             //component={Cart}
             options={{
-              title:'Shopping Cart',
+              title:'Giỏ Hàng',
               headerTitleStyle:{
                 fontWeight:'bold'
               },

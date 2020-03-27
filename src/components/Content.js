@@ -29,6 +29,7 @@ export default class Content extends Component {
         }
         else if (action == 'plus') {
             this.setState({count:count+1})
+            let product = this.state.product
         }
         else {
             return null
@@ -54,7 +55,7 @@ export default class Content extends Component {
                     <View style={{ flex: 1, marginBottom: 5, paddingLeft: 10, flexDirection: 'row', justifyContent: 'center' }}>
                         <TouchableOpacity onPress={() => this.handleCount('minus')} style={{ marginRight: 5 }}><AntIcon name='minussquare' size={25} color='#CCCCCC' /></TouchableOpacity>
                         <Text style={{ color: '#000000', fontWeight: 'bold', fontSize: 20 }}>{this.state.count}</Text>
-                        <TouchableOpacity onPress={() => this.handleCount('plus')} style={{ marginLeft: 5 }}><AntIcon name='plussquare' size={25} color='#CCCCCC' /></TouchableOpacity>
+                        <TouchableOpacity onPress={(item) => this.handleCount('plus')} style={{ marginLeft: 5 }}><AntIcon name='plussquare' size={25} color='#CCCCCC' /></TouchableOpacity>
                     </View>
                 </View>
             </View>

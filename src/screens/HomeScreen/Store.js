@@ -8,7 +8,18 @@ import Content from '../../components/Content'
 
 //import styles
 import {titleStyle} from '../../assets/css'
+import { Header } from 'react-native-elements'
 
+export class CustomRightHeader extends Component {
+    render(){
+        return(
+            <View>
+                    <TouchableOpacity onPress={() => this.props.cartPress()}><AntIcon name='shoppingcart' size={30} color='#fff' /></TouchableOpacity>
+                </View>
+        )
+    }
+    
+}
 export default class Store extends Component {
     state = {
         products: Products
@@ -29,15 +40,20 @@ export default class Store extends Component {
     }
 
     render() {
-        let item = this.state.products[0];
+       // let item = this.state.products[0];
         return (
             <Grid>
-                <Row size={1} >
+                <Header
+                    //leftComponent={{ icon: 'menu', color: '#fff' }}
+                    centerComponent={{ text: 'Store', style: { color: '#fff',fontSize:30 } }}
+                    rightComponent={<CustomRightHeader cartPress = {() => this.handleCartPress()}/>}
+                />
+                {/* <Row size={1} >
                     <Text style={[titleStyle]}> Shoes </Text>
-                    <View style={{justifyContent:'center'}}>
-                        <TouchableOpacity onPress={() => this.handleCartPress()}><Text style={{textAlign:'right'}}>Cart</Text></TouchableOpacity>
+                    <View style={{ justifyContent: 'center' }}>
+                        <TouchableOpacity onPress={() => this.handleCartPress()}><Text style={{ textAlign: 'right', color: 'red' }}><AntIcon name='shoppingcart' size={30} />Giỏ Hàng</Text></TouchableOpacity>
                     </View>
-                </Row>
+                </Row> */}
                 <Row size={10}>
                     <ScrollView >
                         <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>

@@ -17,7 +17,7 @@ const Tab = createBottomTabNavigator();
 
 export default class Home extends Component {
     state = {
-        products: []
+        products: []        
     }
 
     componentDidMount = () => {
@@ -46,25 +46,33 @@ export default class Home extends Component {
                         fontSize: 12,
                         
                       },
+                    showIcon:true,
+                    showLabel:false,
+                    title:true
                 }}
                 
             >
                 <Tab.Screen
                     name='Store'
-                    component={Store}
+                    //component={Store}
                     options={{
                         tabBarIcon: ({ focused, color, size }) => {
                             return <FontAwesome name="store" color={color} size={size} />
-                        }
+                        },
+                        title:'Cửa Hàng'
                     }}
-                />
+                >
+                    {props => <Store {...props} />}
+                </Tab.Screen>
                 <Tab.Screen
                     name='Favorites'
                     component={Favorites}
                     options={{
                         tabBarIcon: ({ focused, color, size }) => {
                             return <MaterialIcon name="favorite-border" color={color} size={size} />
-                        }
+                        },
+                        title:'Yêu Thích',
+                        
                     }}
                 />
                 <Tab.Screen
@@ -73,17 +81,21 @@ export default class Home extends Component {
                     options={{
                         tabBarIcon: ({focused, color, size}) => {
                             return <MaterialComunityIcon name='shoe-formal' color={color} size={size} />
-                        }
+                        },
+                        title:'Giày'
                     }}
                 />
                 <Tab.Screen
                     name='History'
-                    component={History}
+                    //component={History}
                     options={{
-                        tabBarIcon: ({focused, color, size}) => {
+                        tabBarIcon: ({ focused, color, size }) => {
                             return <FontAwesome name='history' color={color} size={size} />
-                        }
-                    }} />
+                        },
+                        title:'Lịch Sử'
+                    }}>
+                    {props => <History {...props} histories={this.props.histories} />}
+                </Tab.Screen>
             </Tab.Navigator>
         );
     }
