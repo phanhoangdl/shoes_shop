@@ -11,10 +11,7 @@ import { widthScreen } from '../assets/css'
 export default class Related extends Component {
     state = {
         product:this.props.product,
-
     }
-
-    
 
     renderRelated = () => {
         let products = data
@@ -24,7 +21,7 @@ export default class Related extends Component {
                 let related = products.find(x => x.maSP == item);
                 try {
                     return (
-                        <TouchableOpacity key={index} activeOpacity={0.1} >
+                        <TouchableOpacity key={index} activeOpacity={0.1} onPress = {() => this.props.relatedClick(related)} >
                             <View  style={{ flexDirection: 'row', width: widthScreen }}>
                                 <View style={{ flex: 1 }}>
                                     <Image style={{ marginLeft: 2, width: 90, height: 90 }} source={{ uri: related.hinhAnh }} />

@@ -3,8 +3,8 @@
 // ==================================
 
 import React, { Component } from 'react'
-import { Text, View,Image,Dimensions, TouchableOpacity, ScrollView } from 'react-native'
-import {Grid,Row,Col} from 'react-native-easy-grid'
+import { Text, View, Image, Dimensions, TouchableOpacity, ScrollView } from 'react-native'
+import { Grid, Row, Col } from 'react-native-easy-grid'
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5'
 import Size from '../../components/Size';
 
@@ -15,17 +15,17 @@ import Related from '../../components/Related'
 import numberWithCommas from '../../common/util/format_price'
 
 //import styles
-import {widthScreen} from '../../assets/css'
+import { widthScreen } from '../../assets/css'
 
 export default class ProductDetail extends Component {
-    state ={
-        product:null
+    state = {
+        product: null
     }
 
-    componentDidMount () {
-        let {route} = this.props;
-        let {product} = route.params.params;
-        this.setState({product:product});
+    componentDidMount() {
+        let { route } = this.props;
+        let { product } = route.params.params;
+        this.setState({ product: product });
     }
 
     handleBuyClick = () => {
@@ -34,7 +34,7 @@ export default class ProductDetail extends Component {
     // hiển thị phần chi tiết sản phẩm
     renderDetail = () => {
         let product = this.state.product;
-        
+
         if (product == null) {
             return (
                 <Text>Không có sản phẩm</Text>
@@ -44,8 +44,8 @@ export default class ProductDetail extends Component {
             return (
                 <View style={{ marginLeft: 10, marginRight: 10, paddingRight: 10, width: widthScreen }}>
                     <Image source={{ uri: product.hinhAnh }} style={{ height: '40%', width: '40%', justifyContent: 'center', alignSelf: 'center' }} />
-                    <Text style={{ color: '#FFCC00', fontSize: 18, fontWeight: 'bold' }}>{product.tenSP}</Text>
-                    <Text style={{ color: '#000000', textAlign: 'auto' }}>{product.moTa}</Text>
+                    <Text style={{ color: '#FFCC00', fontSize: 20, fontWeight: 'bold' }}>{product.tenSP}</Text>
+                    <Text style={{ color: '#00000F', textAlign: 'auto' }}>{product.moTa}</Text>
                     <Text style={{ color: '#FF0000', fontSize: 20 }}>Giá: {numberWithCommas(product.gia)}</Text>
                     <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}><Size sizes={product.size} /></View>
                     <View style={{ alignSelf: 'flex-end', marginRight: 10, marginTop: 10, marginBottom: 20 }}>
@@ -59,15 +59,21 @@ export default class ProductDetail extends Component {
         }
     }
 
+    // click vào sản phẩm liên quan để xem chi tiết sản phẩm này
+    handleRelatedClick = (product) => {
+        console.log(product)
+        this.setState({ product: product })
+    }
+
     // hiển thị phần sản phẩm liên quan
     renderRelated = () => {
         let product = this.state.product;
-        if(product == null){
+        if (product == null) {
             <Text>Không có sản phẩm liên quan</Text>
         }
-        else{
-            return(
-                <Related product={this.state.product} />
+        else {
+            return (
+                <Related product={this.state.product} relatedClick={(related) => this.handleRelatedClick(related)} />
             )
         }
     }
@@ -75,7 +81,7 @@ export default class ProductDetail extends Component {
     render() {
         return (
             <Grid>
-                <Row size={2} style={{ minHeight:50 }}>
+                <Row size={2} style={{ minHeight: 50 }}>
                     {this.renderDetail()}
                 </Row>
                 <Row size={1}>

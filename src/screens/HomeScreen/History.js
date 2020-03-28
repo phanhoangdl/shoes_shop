@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 import ListProducts from '../../components/ListProducts'
+import {Header} from 'react-native-elements'
+import CustomRightHeader from '../../components/CustomRightHeader'
+
+//import style
+import {header} from '../../assets/css'
 
 export default class History extends Component {
 
@@ -15,9 +20,16 @@ export default class History extends Component {
         }
         
     }
+    
     render() {
         return (
             <View>
+                <Header
+                    backgroundColor={header.backgroundColor}
+                    //leftComponent={{ icon: 'menu', color: '#fff' }}
+                    centerComponent={{ text: 'Lịch Sử', style: { color: header.textColor, fontSize: header.textSize } }}
+                    rightComponent={<CustomRightHeader navigation = {this.props.navigation} />}
+                />
                 {this.renderHistories()}
             </View>
         )

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View,Image,TouchableOpacity } from 'react-native'
+import { Text, View, Image, TouchableOpacity } from 'react-native'
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5'
 
 const widthScreen = Dimensions.get('window').width;
@@ -12,7 +12,7 @@ export default class ProductDetailContent extends Component {
             <View>
                 <View style={{ marginLeft: 10, marginRight: 10, paddingRight: 10, width: widthScreen }}>
                     <Image source={{ uri: product.hinhAnh }} style={{ height: '40%', width: '40%', justifyContent: 'center', alignSelf: 'center' }} />
-                    <Text style={{ color: '#FFCC00', fontSize: 18, fontWeight: 'bold' }}>{product.tenSP}</Text>
+                    <Text style={{ color: '#FFCC00', fontSize: 20, fontWeight: 'bold' }}>{product.tenSP}</Text>
                     <Text style={{ color: '#000000', textAlign: 'auto' }}>{product.moTa}</Text>
                     <Text style={{ color: '#FF0000', fontSize: 20 }}>Giá: {numberWithCommas(product.gia)}</Text>
                     <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}><Size sizes={product.size} /></View>

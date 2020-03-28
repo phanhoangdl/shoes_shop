@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Text, View, TouchableOpacity } from 'react-native'
 import Products from '../../common/products.json'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import FonttistoIcon from 'react-native-vector-icons/Fontisto'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import MaterialComunityIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 import FontAwesome from 'react-native-vector-icons/FontAwesome5'
@@ -26,14 +25,9 @@ export default class Home extends Component {
         this.setState({ products: Products });
     }
 
-    renderProducts = () => {
-        return (this.state.products.map((item, index) => {
-            return (
-                <View key={index}><Text>{item.tenSP}</Text></View>
-            )
-        }))
+    handleCart = (product,action) => {
+        this.props.handleCart(product,action)
     }
-
     render() {
         let { navigation } = this.props;
 
@@ -62,7 +56,7 @@ export default class Home extends Component {
                         title:'Cửa Hàng'
                     }}
                 >
-                    {props => <Store {...props} />}
+                    {props => <Store {...props} handleCart={(product,action) => this.handleCart(product,action)}/>}
                 </Tab.Screen>
                 <Tab.Screen
                     name='Favorites'
