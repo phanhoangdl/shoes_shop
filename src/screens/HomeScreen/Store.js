@@ -1,14 +1,10 @@
 import React, { Component } from 'react'
 import { Text, View, Dimensions, Image, StyleSheet, ScrollView, FlatList, TouchableOpacity } from 'react-native'
 import { Grid, Row, Col } from 'react-native-easy-grid'
-import AntIcon from 'react-native-vector-icons/AntDesign'
 import Products from '../../common/products.json'
 import Content from '../../components/Content'
-import CustomRightHeader from '../../components/CustomRightHeader'
 
-//import styles
-import { Header } from 'react-native-elements'
-import {header} from '../../assets/css'
+import HeaderElements from '../../components/HeaderElements'
 
 export default class Store extends Component {
     state = {
@@ -32,12 +28,7 @@ export default class Store extends Component {
     render() {
         return (
             <Grid>
-                <Header
-                    backgroundColor={header.backgroundColor}
-                    //leftComponent={{ icon: 'menu', color: '#fff' }}
-                    centerComponent={{ text: 'Store', style: { color: header.textColor, fontSize: header.textSize } }}
-                    rightComponent={<CustomRightHeader navigation = {this.props.navigation} />}
-                />
+                <HeaderElements navigation={this.props} />
                 <Row size={10}>
                     <ScrollView >
                         <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>

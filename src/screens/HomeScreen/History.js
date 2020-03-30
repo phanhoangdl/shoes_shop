@@ -5,7 +5,8 @@ import {Header} from 'react-native-elements'
 import CustomRightHeader from '../../components/CustomRightHeader'
 
 //import style
-import {header} from '../../assets/css'
+import {header, heightScreen} from '../../assets/css'
+import HeaderElements from '../../components/HeaderElements'
 
 export default class History extends Component {
 
@@ -24,13 +25,12 @@ export default class History extends Component {
     render() {
         return (
             <View>
-                <Header
-                    backgroundColor={header.backgroundColor}
-                    //leftComponent={{ icon: 'menu', color: '#fff' }}
-                    centerComponent={{ text: 'Lịch Sử', style: { color: header.textColor, fontSize: header.textSize } }}
-                    rightComponent={<CustomRightHeader navigation = {this.props.navigation} />}
-                />
-                {this.renderHistories()}
+                <HeaderElements navigation={this.props} />
+                <View><Text style={{ fontSize: 20, marginTop: 5, marginBottom: 5, fontWeight: 'bold' }}>Các Sản Phẩm Đã Mua({this.props.histories.length})</Text></View>
+                <View style={{ maxHeight: heightScreen * .7 }}>
+                    {this.renderHistories()}
+                </View>
+
             </View>
         )
     }

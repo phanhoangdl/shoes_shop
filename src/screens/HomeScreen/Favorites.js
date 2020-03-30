@@ -5,18 +5,14 @@ import CustomRightHeader from '../../components/CustomRightHeader'
 
 //import css
 import {header} from '../../assets/css'
+import HeaderElements from '../../components/HeaderElements'
 
 export default class Favorites extends Component {
     
     render() {
         return (
             <View>
-                <Header
-                    backgroundColor={header.backgroundColor}
-                    //leftComponent={{ icon: 'menu', color: '#fff' }}
-                    centerComponent={{ text: 'Yêu Thích', style: { color:header.textColor, fontSize: header.textSize } }}
-                    rightComponent={<CustomRightHeader navigation = {this.props.navigation} />}
-                />
+                <HeaderElements navigation={this.props} />
                 <Text> Favorites </Text>
             </View>
         )

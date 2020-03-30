@@ -8,6 +8,7 @@ import ListProducts from '../../components/ListProducts';
 //import utils
 import numberWithCommas from '../../common/util/format_price'
 import { widthScreen } from '../../assets/css';
+import { Card } from 'react-native-elements';
 
 const sum = (arr) => {
     var sum = 0;
@@ -42,12 +43,15 @@ export default class Cart extends Component {
         let products = this.state.products
         if (products != null && products.length > 0) {
             return (
-                <View style={{ backgroundColor: 'rgba(124,205,124,0.7)', width: widthScreen, paddingLeft: 10 }}>
-                    <Text style={{ color: '#FFFFFF', fontSize: 20 }}>
-                        - Bạn đã chọn mua {products.length} sản phẩm {"\n"}
+                <Card containerStyle={{ padding: 15,backgroundColor:'rgba(124,205,124,0.7)' }} style={{ width: widthScreen}}>
+                    <View style={{ width: widthScreen * .88, paddingLeft: 10 }}>
+                        <Text style={{ color: '#FFFFFF', fontSize: 20 }}>
+                            - Bạn đã chọn mua {products.length} sản phẩm {"\n"}
                         - Tổng tiền thanh toán: {numberWithCommas(sum(products))}đ
                     </Text>
-                </View>
+                    </View>
+                </Card>
+
 
             )
 
